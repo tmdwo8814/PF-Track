@@ -13,7 +13,6 @@ DOCKER_OPTS = \
 	-v /tmp/.X11-unix:/tmp/.X11-unix \
 	-v /mnt/fsx:/mnt/fsx \
 	-v ~/.ssh:/root/.ssh \
-	-v ~/.aws:/root/.aws \
 	-v ${WORK_DIR}:/workspace/${PROJECT} \
 	-v ${DATA_ROOT}:/workspace/${PROJECT}/data \
 	-v ${CKPTS_ROOT}:/workspace/${PROJECT}/ckpts \
@@ -22,13 +21,6 @@ DOCKER_OPTS = \
 	--network=host \
 	--pid=host \
 	--privileged
-
-DOCKER_BUILD_ARGS = \
-	--build-arg AWS_ACCESS_KEY_ID \
-	--build-arg AWS_SECRET_ACCESS_KEY \
-	--build-arg AWS_DEFAULT_REGION \
-	--build-arg WANDB_ENTITY \
-	--build-arg WANDB_API_KEY \
 
 docker-build:
 	nvidia-docker image build -f $(DOCKER_FILE) -t $(DOCKER_IMAGE) \

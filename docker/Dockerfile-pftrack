@@ -66,8 +66,8 @@ ARG MMDET3D="v0.17.1"
 ENV FORCE_CUDA="1"
 
 # Optional: SimpleTrack for BEV visualization
-RUN git clone https://github.com/tusen-ai/SimpleTrack && cd SimpleTrack && \
-    pip install -e .
+# RUN git clone https://github.com/tusen-ai/SimpleTrack && cd SimpleTrack && \
+#     pip install -e .
 
 RUN pip install mmcv-full==${MMCV} -f https://download.openmmlab.com/mmcv/dist/cu111/torch1.9.0/index.html
 
