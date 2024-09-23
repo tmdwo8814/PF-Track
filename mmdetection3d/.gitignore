@@ -65,8 +65,7 @@ instance/
 .scrapy
 
 # Sphinx documentation
-docs/en/_build/
-docs/zh_cn/_build/
+docs/_build/
 
 # PyBuilder
 target/
@@ -115,32 +114,21 @@ data
 *.pkl.json
 *.log.json
 work_dirs/
-ckpts/
-data/
-
 exps/
 *~
-
-**wandb/
-wandb-debug.log
-wandb/
-*.wandb
-work_dirs
+mmdet3d/.mim
 
 # Pytorch
 *.pth
 
 # demo
 *.jpg
+*.png
 data/s3dis/Stanford3dDataset_v1.2_Aligned_Version/
 data/scannet/scans/
 data/sunrgbd/OFFICIAL_SUNRGBD/
 *.obj
 *.ply
 
-
-# Wandb logging
-wandb/*
-
-# Tracking tools
-SimpleTrack/*
+# Waymo evaluation
+mmdet3d/core/evaluation/waymo_utils/compute_detection_metrics_main
