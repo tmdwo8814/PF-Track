@@ -36,6 +36,42 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 
+# 필수 도구 설치 및 software-properties-common 설치
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    cmake \
+    curl \
+    docker.io \
+    ffmpeg \
+    git \
+    htop \
+    libsm6 \
+    libxext6 \
+    libglib2.0-0 \
+    libxrender-dev \
+    ninja-build \
+    unzip \
+    vim \
+    wget \
+    sudo \
+    software-properties-common \  
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+
+RUN add-apt-repository ppa:deadsnakes/ppa && \
+    apt-get update && \
+    apt-get install -y python3.8 python3.8-dev python3.8-distutils && \
+    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
+    python3.8 get-pip.py && \
+    rm get-pip.py
+
+# Python 명령어를 python3.8로 심볼릭 링크 설정
+RUN ln -sf /usr/bin/python3.8 /usr/bin/python && \
+    ln -sf /usr/bin/python3.8 /usr/local/bin/python && \
+    rm -f /usr/local/bin/pip && ln -s /usr/local/bin/pip3 /usr/local/bin/pip
+
+
 # Allow OpenSSH to talk to containers without asking for confirmation
 RUN cat /etc/ssh/ssh_config | grep -v StrictHostKeyChecking > /etc/ssh/ssh_config.new && \
     echo "    StrictHostKeyChecking no" >> /etc/ssh/ssh_config.new && \
@@ -82,10 +118,10 @@ RUN git clone https://github.com/open-mmlab/mmsegmentation.git && cd mmsegmentat
     pip install -e .
 ENV PYTHONPATH="/workspace/mmlab/mmsegmentation:$PYTHONPATH"
 
-RUN git clone https://github.com/open-mmlab/mmdetection3d.git && cd mmdetection3d && \
-    # git checkout ${MMDET3D} && \
-    pip install -e .
-ENV PYTHONPATH="/workspace/mmlab/mmdetection3d:$PYTHONPATH"
+# RUN git clone https://github.com/open-mmlab/mmdetection3d.git && cd mmdetection3d && \
+#     # git checkout ${MMDET3D} && \
+#     pip install -e .
+# ENV PYTHONPATH="/workspace/mmlab/mmdetection3d:$PYTHONPATH"
 
 WORKDIR /workspace/PF_Track
 RUN git config --global --add safe.directory /workspace/PF_Track
