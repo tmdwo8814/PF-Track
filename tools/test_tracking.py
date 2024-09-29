@@ -15,11 +15,15 @@ from mmcv.parallel import MMDataParallel, MMDistributedDataParallel
 from mmcv.runner import (get_dist_info, init_dist, load_checkpoint,
                          wrap_fp16_model)
 
+import sys
+sys.path.append('/home/sj/3dmot/PF-Track/')
+
 from projects.tracking_plugin.test_track_api import single_gpu_test_tracking
 from mmdet3d.datasets import build_dataloader, build_dataset
 from mmdet3d.models import build_model
 from mmdet.apis import set_random_seed
 from mmdet.datasets import replace_ImageToTensor
+
 
 
 def parse_args():
